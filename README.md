@@ -1,1 +1,1 @@
-Hier findest du NodeRED-Beispielprogramme aus den Beitragen der Seite https://cohob.de/blog .
+Hier findest du die NodeRED-Beispielprogramme/Flows aus den Beiträgen der Seite https://cohob.de/blog .
