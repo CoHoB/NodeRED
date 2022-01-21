@@ -1,0 +1,904 @@
+[
+    {
+        "id": "9b6e000d.79f3e",
+        "type": "time-inject",
+        "z": "1a03e04e.1621",
+        "name": "",
+        "nameInt": "⏲ flow.lightWakeup.time = Zeitpunkt",
+        "positionConfig": "",
+        "props": [
+            {
+                "p": "",
+                "pt": "msgPayload",
+                "v": "",
+                "vt": "date",
+                "o": "",
+                "oT": "none",
+                "oM": "60000",
+                "f": "HH:mm",
+                "fS": 99,
+                "fT": "Anderes",
+                "fI": "HH:mm",
+                "next": true,
+                "days": "",
+                "months": "",
+                "onlyOddDays": false,
+                "onlyEvenDays": false,
+                "onlyOddWeeks": false,
+                "onlyEvenWeeks": false
+            }
+        ],
+        "injectTypeSelect": "time",
+        "intervalCount": 1,
+        "intervalCountType": "num",
+        "intervalCountMultiplier": 60000,
+        "time": "lightWakeup.time",
+        "timeType": "flow",
+        "offset": 0,
+        "offsetType": "none",
+        "offsetMultiplier": 60000,
+        "timeEnd": "",
+        "timeEndType": "entered",
+        "timeEndOffset": 0,
+        "timeEndOffsetType": "none",
+        "timeEndOffsetMultiplier": 60000,
+        "timeDays": "*",
+        "timeOnlyOddDays": false,
+        "timeOnlyEvenDays": false,
+        "timeOnlyOddWeeks": false,
+        "timeOnlyEvenWeeks": false,
+        "timeMonths": "*",
+        "timedatestart": "",
+        "timedateend": "",
+        "property": "",
+        "propertyType": "none",
+        "propertyCompare": "true",
+        "propertyThreshold": "",
+        "propertyThresholdType": "num",
+        "timeAlt": "",
+        "timeAltType": "entered",
+        "timeAltDays": "*",
+        "timeAltOnlyOddDays": false,
+        "timeAltOnlyEvenDays": false,
+        "timeAltOnlyOddWeeks": false,
+        "timeAltOnlyEvenWeeks": false,
+        "timeAltMonths": "*",
+        "timeAltOffset": 0,
+        "timeAltOffsetType": "none",
+        "timeAltOffsetMultiplier": 60000,
+        "once": false,
+        "onceDelay": 0.1,
+        "recalcTime": "6",
+        "x": 240,
+        "y": 560,
+        "wires": [
+            [
+                "de6203d1.d6b0b"
+            ]
+        ]
+    },
+    {
+        "id": "2a7bfb6d.9448a4",
+        "type": "ui_text_input",
+        "z": "1a03e04e.1621",
+        "name": "",
+        "label": "Weckzeit",
+        "tooltip": "",
+        "group": "f5a8c0e4.4f52b",
+        "order": 2,
+        "width": 3,
+        "height": 1,
+        "passthru": false,
+        "mode": "time",
+        "delay": "0",
+        "topic": "",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "str",
+        "x": 360,
+        "y": 340,
+        "wires": [
+            [
+                "9cba0406.d54248",
+                "e57a5004.de2dc",
+                "69aaa9b3.95b478"
+            ]
+        ]
+    },
+    {
+        "id": "7ba1f39b.450d6c",
+        "type": "inject",
+        "z": "1a03e04e.1621",
+        "name": "Weckzeit laden",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.1",
+        "topic": "",
+        "payload": "wakeup.timeInMsec",
+        "payloadType": "flow",
+        "x": 180,
+        "y": 340,
+        "wires": [
+            [
+                "2a7bfb6d.9448a4"
+            ]
+        ]
+    },
+    {
+        "id": "e57a5004.de2dc",
+        "type": "change",
+        "z": "1a03e04e.1621",
+        "name": "Weckzeit speichern",
+        "rules": [
+            {
+                "t": "set",
+                "p": "wakeup.timeInMsec",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7047d92a.be89c8",
+        "type": "link out",
+        "z": "1a03e04e.1621",
+        "name": "",
+        "links": [
+            "861cca2a.c01448",
+            "c4a019da.6848f8"
+        ],
+        "x": 1195,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "d2cfab00.2a7298",
+        "type": "switch",
+        "z": "1a03e04e.1621",
+        "name": "WE/Feiertag?",
+        "property": "day.today.isWeekendOrHoliday",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 680,
+        "y": 560,
+        "wires": [
+            [
+                "1bc53cac.1fc70b"
+            ]
+        ]
+    },
+    {
+        "id": "753c7def.03cfb4",
+        "type": "ui_switch",
+        "z": "1a03e04e.1621",
+        "name": "An/Aus",
+        "label": "",
+        "tooltip": "",
+        "group": "f5a8c0e4.4f52b",
+        "order": 1,
+        "width": 1,
+        "height": 1,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "",
+        "topicType": "str",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": true,
+        "className": "",
+        "x": 360,
+        "y": 420,
+        "wires": [
+            [
+                "20e6d83d.e85e98"
+            ]
+        ]
+    },
+    {
+        "id": "20e6d83d.e85e98",
+        "type": "change",
+        "z": "1a03e04e.1621",
+        "name": "Wecker an/aus",
+        "rules": [
+            {
+                "t": "set",
+                "p": "wakeup.enabled",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 580,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dc6afd13.84794",
+        "type": "inject",
+        "z": "1a03e04e.1621",
+        "name": "Status laden",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.1",
+        "topic": "",
+        "payload": "wakeup.enabled",
+        "payloadType": "flow",
+        "x": 170,
+        "y": 420,
+        "wires": [
+            [
+                "753c7def.03cfb4"
+            ]
+        ]
+    },
+    {
+        "id": "de6203d1.d6b0b",
+        "type": "switch",
+        "z": "1a03e04e.1621",
+        "name": "Wecker an?",
+        "property": "wakeup.enabled",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 490,
+        "y": 560,
+        "wires": [
+            [
+                "d2cfab00.2a7298"
+            ]
+        ]
+    },
+    {
+        "id": "d61d937c.446bd",
+        "type": "ccu-set-value",
+        "z": "1a03e04e.1621",
+        "name": "Dimmzeit",
+        "iface": "",
+        "ccuConfig": "38263145.35ea0e",
+        "rooms": "Schlafzimmer",
+        "roomsRx": "str",
+        "functions": "",
+        "functionsRx": "str",
+        "device": "",
+        "deviceRx": "str",
+        "deviceName": "dg_schlazi_dimmer_rechts",
+        "deviceNameRx": "str",
+        "deviceType": "",
+        "deviceTypeRx": "str",
+        "channel": "",
+        "channelRx": "str",
+        "channelName": "dg_schlazi_dimmer_rechts:5",
+        "channelNameRx": "str",
+        "channelType": "",
+        "channelTypeRx": "str",
+        "channelIndex": "",
+        "channelIndexRx": "str",
+        "datapoint": "RAMP_TIME",
+        "datapointRx": "str",
+        "force": false,
+        "x": 1120,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "1bc53cac.1fc70b",
+        "type": "function",
+        "z": "1a03e04e.1621",
+        "name": "Lichtwecker starten",
+        "func": "return [{payload : 900}, {payload : 1}];",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 930,
+        "y": 560,
+        "wires": [
+            [
+                "d61d937c.446bd"
+            ],
+            [
+                "477a66b5.bb28b"
+            ]
+        ],
+        "outputLabels": [
+            "Dimmzeit",
+            "Zielzustand"
+        ],
+        "icon": "node-red/light.svg"
+    },
+    {
+        "id": "477a66b5.bb28b",
+        "type": "ccu-set-value",
+        "z": "1a03e04e.1621",
+        "name": "Level",
+        "iface": "",
+        "ccuConfig": "38263145.35ea0e",
+        "rooms": "Schlafzimmer",
+        "roomsRx": "str",
+        "functions": "",
+        "functionsRx": "str",
+        "device": "",
+        "deviceRx": "str",
+        "deviceName": "dg_schlazi_dimmer_rechts",
+        "deviceNameRx": "str",
+        "deviceType": "",
+        "deviceTypeRx": "str",
+        "channel": "",
+        "channelRx": "str",
+        "channelName": "dg_schlazi_dimmer_rechts:5",
+        "channelNameRx": "str",
+        "channelType": "",
+        "channelTypeRx": "str",
+        "channelIndex": "",
+        "channelIndexRx": "str",
+        "datapoint": "LEVEL",
+        "datapointRx": "str",
+        "force": false,
+        "x": 1110,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "73730a70.7b96d4",
+        "type": "time-inject",
+        "z": "1a03e04e.1621",
+        "name": "",
+        "nameInt": "⏲ flow.wakeup.time = Zeitpunkt",
+        "positionConfig": "",
+        "props": [
+            {
+                "p": "",
+                "pt": "msgPayload",
+                "v": "",
+                "vt": "date",
+                "o": "",
+                "oT": "none",
+                "oM": "60000",
+                "f": "HH:mm",
+                "fS": 99,
+                "fT": "Anderes",
+                "fI": "HH:mm",
+                "next": true,
+                "days": "",
+                "months": "",
+                "onlyOddDays": false,
+                "onlyEvenDays": false,
+                "onlyOddWeeks": false,
+                "onlyEvenWeeks": false
+            }
+        ],
+        "injectTypeSelect": "time",
+        "intervalCount": 1,
+        "intervalCountType": "num",
+        "intervalCountMultiplier": 60000,
+        "time": "wakeup.time",
+        "timeType": "flow",
+        "offset": 0,
+        "offsetType": "none",
+        "offsetMultiplier": 60000,
+        "timeEnd": "",
+        "timeEndType": "entered",
+        "timeEndOffset": 0,
+        "timeEndOffsetType": "none",
+        "timeEndOffsetMultiplier": 60000,
+        "timeDays": "*",
+        "timeOnlyOddDays": false,
+        "timeOnlyEvenDays": false,
+        "timeOnlyOddWeeks": false,
+        "timeOnlyEvenWeeks": false,
+        "timeMonths": "*",
+        "timedatestart": "",
+        "timedateend": "",
+        "property": "",
+        "propertyType": "none",
+        "propertyCompare": "true",
+        "propertyThreshold": "",
+        "propertyThresholdType": "num",
+        "timeAlt": "",
+        "timeAltType": "entered",
+        "timeAltDays": "*",
+        "timeAltOnlyOddDays": false,
+        "timeAltOnlyEvenDays": false,
+        "timeAltOnlyOddWeeks": false,
+        "timeAltOnlyEvenWeeks": false,
+        "timeAltMonths": "*",
+        "timeAltOffset": 0,
+        "timeAltOffsetType": "none",
+        "timeAltOffsetMultiplier": 60000,
+        "once": false,
+        "onceDelay": 0.1,
+        "recalcTime": "6",
+        "x": 220,
+        "y": 600,
+        "wires": [
+            [
+                "3d077bb6.d6d65c"
+            ]
+        ]
+    },
+    {
+        "id": "3d077bb6.d6d65c",
+        "type": "switch",
+        "z": "1a03e04e.1621",
+        "name": "Wecker an?",
+        "property": "wakeup.enabled",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 490,
+        "y": 600,
+        "wires": [
+            [
+                "10e4715a.8508ff"
+            ]
+        ]
+    },
+    {
+        "id": "10e4715a.8508ff",
+        "type": "switch",
+        "z": "1a03e04e.1621",
+        "name": "WE/Feiertag?",
+        "property": "day.today.isWeekendOrHoliday",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 680,
+        "y": 600,
+        "wires": [
+            [
+                "7047d92a.be89c8"
+            ]
+        ]
+    },
+    {
+        "id": "9cba0406.d54248",
+        "type": "moment",
+        "z": "1a03e04e.1621",
+        "name": "Lichtweckzeit setzen",
+        "topic": "",
+        "input": "",
+        "inputType": "msg",
+        "inTz": "ETC/GMT",
+        "adjAmount": "30",
+        "adjType": "minutes",
+        "adjDir": "subtract",
+        "format": "HH:mm",
+        "locale": "de_DE",
+        "output": "lightWakeup.time",
+        "outputType": "flow",
+        "outTz": "ETC/GMT",
+        "x": 600,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "69aaa9b3.95b478",
+        "type": "moment",
+        "z": "1a03e04e.1621",
+        "name": "Weckzeit setzen",
+        "topic": "",
+        "input": "",
+        "inputType": "msg",
+        "inTz": "ETC/GMT",
+        "adjAmount": 0,
+        "adjType": "days",
+        "adjDir": "add",
+        "format": "HH:mm",
+        "locale": "de_DE",
+        "output": "wakeup.time",
+        "outputType": "flow",
+        "outTz": "ETC/GMT",
+        "x": 580,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "911bffc6.a918c",
+        "type": "inject",
+        "z": "1a03e04e.1621",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "10 00 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 160,
+        "wires": [
+            [
+                "508059d0.e42238"
+            ]
+        ]
+    },
+    {
+        "id": "2981ab1c.8c3034",
+        "type": "inject",
+        "z": "1a03e04e.1621",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 200,
+        "wires": [
+            [
+                "508059d0.e42238"
+            ]
+        ]
+    },
+    {
+        "id": "ffad5b0d.597d48",
+        "type": "change",
+        "z": "1a03e04e.1621",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "day",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2c026707.326278",
+        "type": "comment",
+        "z": "1a03e04e.1621",
+        "name": "Feiertag/Wochenende setzen",
+        "info": "",
+        "x": 160,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "508059d0.e42238",
+        "type": "german-holidays",
+        "z": "1a03e04e.1621",
+        "name": "",
+        "topic": "",
+        "region": "",
+        "holidays": [
+            {
+                "id": "NEUJAHRSTAG",
+                "name": "Neujahrstag",
+                "nameAlt": "",
+                "character": 2,
+                "month": 1,
+                "day": 1,
+                "nth": 0,
+                "dow": 1,
+                "plType": "none",
+                "plValue": ""
+            },
+            {
+                "id": "KARFREITAG",
+                "name": "Karfreitag",
+                "nameAlt": "",
+                "character": 2,
+                "month": -1,
+                "day": -2,
+                "nth": 0,
+                "dow": -2,
+                "plType": "none",
+                "plValue": ""
+            },
+            {
+                "id": "OSTERMONTAG",
+                "name": "Ostermontag",
+                "nameAlt": "",
+                "character": 2,
+                "month": -1,
+                "day": 1,
+                "nth": 0,
+                "dow": 1,
+                "plType": "none",
+                "plValue": ""
+            },
+            {
+                "id": "TAG_DER_ARBEIT",
+                "name": "Maifeiertag",
+                "nameAlt": "Tag der Arbeit",
+                "character": 256,
+                "month": 5,
+                "day": 1,
+                "nth": 0,
+                "dow": 1,
+                "plType": "none",
+                "plValue": ""
+            },
+            {
+                "id": "CHRISTIHIMMELFAHRT",
+                "name": "Christi Himmelfahrt",
+                "nameAlt": "Vatertag",
+                "character": 2,
+                "month": -1,
+                "day": 39,
+                "nth": 5,
+                "dow": 4,
+                "plType": "none",
+                "plValue": ""
+            },
+            {
+                "id": "PFINGSTMONTAG",
+                "name": "Pfingstmontag",
+                "nameAlt": "",
+                "character": 2,
+                "month": -1,
+                "day": 50,
+                "nth": 7,
+                "dow": 1,
+                "plType": "none",
+                "plValue": ""
+            },
+            {
+                "id": "DEUTSCHEEINHEIT",
+                "name": "Tag der Deutschen Einheit",
+                "nameAlt": "",
+                "character": 4,
+                "month": 10,
+                "day": 3,
+                "nth": 0,
+                "dow": 3,
+                "plType": "none",
+                "plValue": ""
+            },
+            {
+                "id": "REFORMATIONSTAG",
+                "name": "Reformationstag",
+                "nameAlt": "Halloween",
+                "character": 2,
+                "month": 10,
+                "day": 31,
+                "nth": 4,
+                "dow": 3,
+                "plType": "none",
+                "plValue": ""
+            },
+            {
+                "id": "BUBETAG",
+                "name": "Buß- und Bettag",
+                "nameAlt": "",
+                "character": 1024,
+                "month": -2,
+                "day": -32,
+                "nth": -4,
+                "dow": -4,
+                "plType": "none",
+                "plValue": ""
+            },
+            {
+                "id": "ERSTERWEIHNACHTSFEIERTAG",
+                "name": "1. Weihnachtstag",
+                "nameAlt": "Christtag",
+                "character": 2,
+                "month": 12,
+                "day": 25,
+                "nth": 3,
+                "dow": 4,
+                "plType": "none",
+                "plValue": ""
+            },
+            {
+                "id": "ZWEITERWEIHNACHTSFEIERTAG",
+                "name": "2. Weihnachtstag",
+                "nameAlt": "Stefanitag",
+                "character": 2,
+                "month": 12,
+                "day": 26,
+                "nth": 3,
+                "dow": 5,
+                "plType": "none",
+                "plValue": ""
+            },
+            {
+                "id": "",
+                "name": "Heiligabend",
+                "nameAlt": "",
+                "character": 0,
+                "month": 12,
+                "day": 24,
+                "nth": 3,
+                "dow": 3,
+                "plType": "none",
+                "plValue": ""
+            },
+            {
+                "id": "",
+                "name": "Silvester",
+                "nameAlt": "",
+                "character": 0,
+                "month": 12,
+                "day": 31,
+                "nth": 4,
+                "dow": 3,
+                "plType": "none",
+                "plValue": ""
+            }
+        ],
+        "specialdays": [],
+        "x": 340,
+        "y": 180,
+        "wires": [
+            [
+                "ffad5b0d.597d48"
+            ]
+        ]
+    },
+    {
+        "id": "fb378fe1.1f25",
+        "type": "comment",
+        "z": "1a03e04e.1621",
+        "name": "Wecker setzen",
+        "info": "",
+        "x": 120,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "e0367e10.af816",
+        "type": "comment",
+        "z": "1a03e04e.1621",
+        "name": "Wecker ausführen",
+        "info": "",
+        "x": 130,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "1cec1532.fe6a8b",
+        "type": "comment",
+        "z": "1a03e04e.1621",
+        "name": "zum Weckzeitpunkt wecken",
+        "info": "",
+        "x": 960,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "f5a8c0e4.4f52b",
+        "type": "ui_group",
+        "name": "Wecker",
+        "tab": "8b69b570.9d49f8",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "38263145.35ea0e",
+        "type": "ccu-connection",
+        "name": "localhost",
+        "host": "localhost",
+        "regaEnabled": true,
+        "bcrfEnabled": true,
+        "iprfEnabled": true,
+        "virtEnabled": true,
+        "bcwiEnabled": false,
+        "cuxdEnabled": false,
+        "regaPoll": true,
+        "regaInterval": "30",
+        "rpcPingTimeout": "60",
+        "rpcInitAddress": "127.0.0.1",
+        "rpcServerHost": "127.0.0.1",
+        "rpcBinPort": "2047",
+        "rpcXmlPort": "2048",
+        "tls": false,
+        "inSecure": false,
+        "authentication": false,
+        "username": "",
+        "password": "",
+        "queueTimeout": "5000",
+        "queuePause": "250",
+        "contextStore": ""
+    },
+    {
+        "id": "8b69b570.9d49f8",
+        "type": "ui_tab",
+        "name": "CoHoB",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
