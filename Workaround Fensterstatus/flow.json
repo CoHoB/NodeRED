@@ -1,0 +1,209 @@
+[
+    {
+        "id": "bafbf4e6.057618",
+        "type": "function",
+        "z": "10a365cb.abc45a",
+        "name": "ein Fenster offen?",
+        "func": "let fensterStatus = flow.get(\"fenster\", \"memory\") || false;\nlet dachFensterStatus = flow.get(\"dachFenster\", \"memory\") || false;\n\nreturn {payload: (fensterStatus || dachFensterStatus)}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 270,
+        "y": 280,
+        "wires": [
+            [
+                "6d26632a.428e6c",
+                "9175ef68.0f3e5"
+            ]
+        ]
+    },
+    {
+        "id": "24e5d012.a04ef",
+        "type": "trigger",
+        "z": "10a365cb.abc45a",
+        "name": "",
+        "op1": "",
+        "op2": "",
+        "op1type": "nul",
+        "op2type": "pay",
+        "duration": "1",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 900,
+        "y": 300,
+        "wires": [
+            [
+                "d6649652.03c8f8"
+            ]
+        ]
+    },
+    {
+        "id": "93face1c.3551",
+        "type": "change",
+        "z": "10a365cb.abc45a",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "reset",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 900,
+        "y": 260,
+        "wires": [
+            [
+                "24e5d012.a04ef"
+            ]
+        ]
+    },
+    {
+        "id": "6a0b0bba.be9124",
+        "type": "link in",
+        "z": "10a365cb.abc45a",
+        "name": "",
+        "links": [
+            "d6649652.03c8f8",
+            "6d26632a.428e6c"
+        ],
+        "x": 755,
+        "y": 300,
+        "wires": [
+            [
+                "24e5d012.a04ef"
+            ]
+        ]
+    },
+    {
+        "id": "6d26632a.428e6c",
+        "type": "link out",
+        "z": "10a365cb.abc45a",
+        "name": "",
+        "links": [
+            "6a0b0bba.be9124"
+        ],
+        "x": 415,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "4d59b495.9c655c",
+        "type": "link in",
+        "z": "10a365cb.abc45a",
+        "name": "",
+        "links": [
+            "d6649652.03c8f8"
+        ],
+        "x": 495,
+        "y": 300,
+        "wires": [
+            [
+                "6ffc109f.97b2"
+            ]
+        ]
+    },
+    {
+        "id": "6ffc109f.97b2",
+        "type": "ccu-value",
+        "z": "10a365cb.abc45a",
+        "name": "Fensterstatus Thermostat",
+        "iface": "",
+        "channel": "dg_bad_thermostat:1",
+        "datapoint": "WINDOW_STATE",
+        "mode": "",
+        "start": true,
+        "change": true,
+        "cache": false,
+        "queue": false,
+        "on": 0,
+        "onType": "undefined",
+        "ramp": 0,
+        "rampType": "undefined",
+        "working": false,
+        "ccuConfig": "38263145.35ea0e",
+        "topic": "${CCU}/${Interface}/${channel}/${datapoint}",
+        "x": 670,
+        "y": 260,
+        "wires": [
+            [
+                "93face1c.3551"
+            ]
+        ]
+    },
+    {
+        "id": "9175ef68.0f3e5",
+        "type": "delay",
+        "z": "10a365cb.abc45a",
+        "name": "",
+        "pauseType": "random",
+        "timeout": "5",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "100",
+        "randomLast": "1500",
+        "randomUnits": "milliseconds",
+        "drop": false,
+        "x": 450,
+        "y": 260,
+        "wires": [
+            [
+                "6ffc109f.97b2"
+            ]
+        ]
+    },
+    {
+        "id": "d6649652.03c8f8",
+        "type": "link out",
+        "z": "10a365cb.abc45a",
+        "name": "",
+        "links": [
+            "6a0b0bba.be9124",
+            "4d59b495.9c655c"
+        ],
+        "x": 1035,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "38263145.35ea0e",
+        "type": "ccu-connection",
+        "name": "localhost",
+        "host": "localhost",
+        "regaEnabled": true,
+        "bcrfEnabled": true,
+        "iprfEnabled": true,
+        "virtEnabled": true,
+        "bcwiEnabled": false,
+        "cuxdEnabled": false,
+        "regaPoll": true,
+        "regaInterval": "30",
+        "rpcPingTimeout": "60",
+        "rpcInitAddress": "127.0.0.1",
+        "rpcServerHost": "127.0.0.1",
+        "rpcBinPort": "2047",
+        "rpcXmlPort": "2048",
+        "tls": false,
+        "inSecure": false,
+        "authentication": false,
+        "username": "",
+        "password": "",
+        "queueTimeout": "5000",
+        "queuePause": "250",
+        "contextStore": ""
+    }
+]
