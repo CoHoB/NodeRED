@@ -1,33 +1,14 @@
 [
     {
-        "id": "bafbf4e6.057618",
-        "type": "function",
-        "z": "10a365cb.abc45a",
-        "name": "ein Fenster offen?",
-        "func": "let fensterStatus = flow.get(\"fenster\", \"memory\") || false;\nlet dachFensterStatus = flow.get(\"dachFenster\", \"memory\") || false;\n\nreturn {payload: (fensterStatus || dachFensterStatus)}\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "x": 270,
-        "y": 280,
-        "wires": [
-            [
-                "6d26632a.428e6c",
-                "9175ef68.0f3e5"
-            ]
-        ]
-    },
-    {
-        "id": "24e5d012.a04ef",
+        "id": "ef960b5a.2ad128",
         "type": "trigger",
-        "z": "10a365cb.abc45a",
+        "z": "ba89bc21.914a5",
         "name": "",
         "op1": "",
         "op2": "",
         "op1type": "nul",
         "op2type": "pay",
-        "duration": "1",
+        "duration": "2",
         "extend": true,
         "overrideDelay": false,
         "units": "min",
@@ -35,18 +16,19 @@
         "bytopic": "all",
         "topic": "topic",
         "outputs": 1,
-        "x": 900,
-        "y": 300,
+        "x": 1060,
+        "y": 260,
         "wires": [
             [
-                "d6649652.03c8f8"
+                "9c6faa39.65ddf8",
+                "386943b1.905c8c"
             ]
         ]
     },
     {
-        "id": "93face1c.3551",
+        "id": "27dc5788.2f9888",
         "type": "change",
-        "z": "10a365cb.abc45a",
+        "z": "ba89bc21.914a5",
         "name": "",
         "rules": [
             {
@@ -62,66 +44,84 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 900,
+        "x": 840,
         "y": 260,
         "wires": [
             [
-                "24e5d012.a04ef"
+                "ef960b5a.2ad128",
+                "386943b1.905c8c"
             ]
         ]
     },
     {
-        "id": "6a0b0bba.be9124",
+        "id": "4c18ada2.442ba4",
         "type": "link in",
-        "z": "10a365cb.abc45a",
+        "z": "ba89bc21.914a5",
         "name": "",
         "links": [
-            "d6649652.03c8f8",
-            "6d26632a.428e6c"
+            "9c6faa39.65ddf8",
+            "7eec3b0c.dd7134",
+            "f4759224.4bd5e",
+            "1c9566d.5cfc199"
         ],
-        "x": 755,
-        "y": 300,
+        "x": 915,
+        "y": 220,
         "wires": [
             [
-                "24e5d012.a04ef"
+                "ef960b5a.2ad128"
             ]
         ]
     },
     {
-        "id": "6d26632a.428e6c",
+        "id": "9c6faa39.65ddf8",
         "type": "link out",
-        "z": "10a365cb.abc45a",
+        "z": "ba89bc21.914a5",
         "name": "",
         "links": [
-            "6a0b0bba.be9124"
+            "4c18ada2.442ba4",
+            "b8c51af0.285c38"
         ],
-        "x": 415,
+        "x": 1195,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "7eec3b0c.dd7134",
+        "type": "link out",
+        "z": "ba89bc21.914a5",
+        "name": "",
+        "links": [
+            "4c18ada2.442ba4"
+        ],
+        "x": 355,
         "y": 300,
         "wires": []
     },
     {
-        "id": "4d59b495.9c655c",
+        "id": "b8c51af0.285c38",
         "type": "link in",
-        "z": "10a365cb.abc45a",
+        "z": "ba89bc21.914a5",
         "name": "",
         "links": [
-            "d6649652.03c8f8"
+            "9c6faa39.65ddf8",
+            "f4759224.4bd5e",
+            "1c9566d.5cfc199"
         ],
-        "x": 495,
+        "x": 435,
         "y": 300,
         "wires": [
             [
-                "6ffc109f.97b2"
+                "b3ad9f22.9a59"
             ]
         ]
     },
     {
-        "id": "6ffc109f.97b2",
+        "id": "b3ad9f22.9a59",
         "type": "ccu-value",
-        "z": "10a365cb.abc45a",
+        "z": "ba89bc21.914a5",
         "name": "Fensterstatus Thermostat",
-        "iface": "",
-        "channel": "dg_bad_thermostat:1",
+        "iface": "HmIP-RF",
+        "channel": "0003156990CC7D:1 dg_bad_thermostat:1",
         "datapoint": "WINDOW_STATE",
         "mode": "",
         "start": true,
@@ -135,49 +135,70 @@
         "working": false,
         "ccuConfig": "38263145.35ea0e",
         "topic": "${CCU}/${Interface}/${channel}/${datapoint}",
-        "x": 670,
+        "x": 610,
         "y": 260,
         "wires": [
             [
-                "93face1c.3551"
+                "27dc5788.2f9888"
             ]
         ]
     },
     {
-        "id": "9175ef68.0f3e5",
-        "type": "delay",
-        "z": "10a365cb.abc45a",
+        "id": "386943b1.905c8c",
+        "type": "trigger",
+        "z": "ba89bc21.914a5",
         "name": "",
-        "pauseType": "random",
-        "timeout": "5",
-        "timeoutUnits": "milliseconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "100",
-        "randomLast": "1500",
-        "randomUnits": "milliseconds",
-        "drop": false,
-        "x": 450,
-        "y": 260,
+        "op1": "true",
+        "op2": "",
+        "op1type": "bool",
+        "op2type": "pay",
+        "duration": "10",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 1050,
+        "y": 300,
         "wires": [
             [
-                "6ffc109f.97b2"
+                "f4759224.4bd5e"
             ]
         ]
     },
     {
-        "id": "d6649652.03c8f8",
+        "id": "f4759224.4bd5e",
         "type": "link out",
-        "z": "10a365cb.abc45a",
+        "z": "ba89bc21.914a5",
         "name": "",
         "links": [
-            "6a0b0bba.be9124",
-            "4d59b495.9c655c"
+            "4c18ada2.442ba4",
+            "b8c51af0.285c38"
         ],
-        "x": 1035,
+        "x": 1195,
         "y": 300,
         "wires": []
+    },
+    {
+        "id": "b2aabde0.949c4",
+        "type": "function",
+        "z": "ba89bc21.914a5",
+        "name": "zu setzender Status",
+        "func": "\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 190,
+        "y": 260,
+        "wires": [
+            [
+                "b3ad9f22.9a59",
+                "7eec3b0c.dd7134"
+            ]
+        ]
     },
     {
         "id": "38263145.35ea0e",
@@ -196,14 +217,6 @@
         "rpcInitAddress": "127.0.0.1",
         "rpcServerHost": "127.0.0.1",
         "rpcBinPort": "2047",
-        "rpcXmlPort": "2048",
-        "tls": false,
-        "inSecure": false,
-        "authentication": false,
-        "username": "",
-        "password": "",
-        "queueTimeout": "5000",
-        "queuePause": "250",
-        "contextStore": ""
+        "rpcXmlPort": "2048"
     }
 ]
