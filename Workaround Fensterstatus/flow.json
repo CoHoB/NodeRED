@@ -16,39 +16,11 @@
         "bytopic": "all",
         "topic": "topic",
         "outputs": 1,
-        "x": 1060,
+        "x": 1200,
         "y": 260,
         "wires": [
             [
                 "9c6faa39.65ddf8",
-                "386943b1.905c8c"
-            ]
-        ]
-    },
-    {
-        "id": "27dc5788.2f9888",
-        "type": "change",
-        "z": "ba89bc21.914a5",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "reset",
-                "pt": "msg",
-                "to": "true",
-                "tot": "bool"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 840,
-        "y": 260,
-        "wires": [
-            [
-                "ef960b5a.2ad128",
                 "386943b1.905c8c"
             ]
         ]
@@ -64,7 +36,7 @@
             "f4759224.4bd5e",
             "1c9566d.5cfc199"
         ],
-        "x": 915,
+        "x": 1055,
         "y": 220,
         "wires": [
             [
@@ -81,7 +53,7 @@
             "4c18ada2.442ba4",
             "b8c51af0.285c38"
         ],
-        "x": 1195,
+        "x": 1335,
         "y": 260,
         "wires": []
     },
@@ -107,7 +79,7 @@
             "f4759224.4bd5e",
             "1c9566d.5cfc199"
         ],
-        "x": 435,
+        "x": 495,
         "y": 300,
         "wires": [
             [
@@ -135,11 +107,11 @@
         "working": false,
         "ccuConfig": "38263145.35ea0e",
         "topic": "${CCU}/${Interface}/${channel}/${datapoint}",
-        "x": 610,
+        "x": 670,
         "y": 260,
         "wires": [
             [
-                "27dc5788.2f9888"
+                "e69eb406.b7ae78"
             ]
         ]
     },
@@ -160,7 +132,7 @@
         "bytopic": "all",
         "topic": "topic",
         "outputs": 1,
-        "x": 1050,
+        "x": 1190,
         "y": 300,
         "wires": [
             [
@@ -177,7 +149,7 @@
             "4c18ada2.442ba4",
             "b8c51af0.285c38"
         ],
-        "x": 1195,
+        "x": 1335,
         "y": 300,
         "wires": []
     },
@@ -195,8 +167,54 @@
         "y": 260,
         "wires": [
             [
-                "b3ad9f22.9a59",
-                "7eec3b0c.dd7134"
+                "7eec3b0c.dd7134",
+                "28fa5997.f20406"
+            ]
+        ]
+    },
+    {
+        "id": "e69eb406.b7ae78",
+        "type": "function",
+        "z": "ba89bc21.914a5",
+        "name": "Reset wenn Zielzustand erreicht",
+        "func": "let fensterZielStatus = flow.get(\"fenster.zielStatus\", \"memory\") || false;\n\nif (msg.payload == fensterZielStatus) {\n    return {reset: true};\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 930,
+        "y": 260,
+        "wires": [
+            [
+                "ef960b5a.2ad128",
+                "386943b1.905c8c"
+            ]
+        ]
+    },
+    {
+        "id": "28fa5997.f20406",
+        "type": "change",
+        "z": "ba89bc21.914a5",
+        "name": "Zielstatus merken",
+        "rules": [
+            {
+                "t": "set",
+                "p": "#:(memory)::fenster.zielStatus",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 260,
+        "wires": [
+            [
+                "b3ad9f22.9a59"
             ]
         ]
     },
