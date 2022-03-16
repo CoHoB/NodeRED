@@ -1,31 +1,5 @@
 [
     {
-        "id": "ef960b5a.2ad128",
-        "type": "trigger",
-        "z": "ba89bc21.914a5",
-        "name": "",
-        "op1": "",
-        "op2": "",
-        "op1type": "nul",
-        "op2type": "pay",
-        "duration": "2",
-        "extend": true,
-        "overrideDelay": false,
-        "units": "min",
-        "reset": "",
-        "bytopic": "all",
-        "topic": "topic",
-        "outputs": 1,
-        "x": 1200,
-        "y": 260,
-        "wires": [
-            [
-                "9c6faa39.65ddf8",
-                "386943b1.905c8c"
-            ]
-        ]
-    },
-    {
         "id": "4c18ada2.442ba4",
         "type": "link in",
         "z": "ba89bc21.914a5",
@@ -40,7 +14,7 @@
         "y": 220,
         "wires": [
             [
-                "ef960b5a.2ad128"
+                "773a0c7c.051ad4"
             ]
         ]
     },
@@ -53,7 +27,7 @@
             "4c18ada2.442ba4",
             "b8c51af0.285c38"
         ],
-        "x": 1335,
+        "x": 1375,
         "y": 260,
         "wires": []
     },
@@ -116,31 +90,6 @@
         ]
     },
     {
-        "id": "386943b1.905c8c",
-        "type": "trigger",
-        "z": "ba89bc21.914a5",
-        "name": "",
-        "op1": "1",
-        "op2": "",
-        "op1type": "num",
-        "op2type": "pay",
-        "duration": "10",
-        "extend": true,
-        "overrideDelay": false,
-        "units": "s",
-        "reset": "",
-        "bytopic": "all",
-        "topic": "topic",
-        "outputs": 1,
-        "x": 1190,
-        "y": 300,
-        "wires": [
-            [
-                "f4759224.4bd5e"
-            ]
-        ]
-    },
-    {
         "id": "f4759224.4bd5e",
         "type": "link out",
         "z": "ba89bc21.914a5",
@@ -149,8 +98,8 @@
             "4c18ada2.442ba4",
             "b8c51af0.285c38"
         ],
-        "x": 1335,
-        "y": 300,
+        "x": 1375,
+        "y": 380,
         "wires": []
     },
     {
@@ -186,8 +135,8 @@
         "y": 260,
         "wires": [
             [
-                "ef960b5a.2ad128",
-                "386943b1.905c8c"
+                "c393bd32.8a77f",
+                "773a0c7c.051ad4"
             ]
         ]
     },
@@ -199,7 +148,7 @@
         "rules": [
             {
                 "t": "set",
-                "p": "#:(memory)::fenster.zielStatus",
+                "p": "fenster.zielStatus",
                 "pt": "flow",
                 "to": "payload",
                 "tot": "msg"
@@ -215,6 +164,75 @@
         "wires": [
             [
                 "b3ad9f22.9a59"
+            ]
+        ]
+    },
+    {
+        "id": "773a0c7c.051ad4",
+        "type": "trigger",
+        "z": "ba89bc21.914a5",
+        "name": "",
+        "op1": "",
+        "op2": "fenster.zielStatus",
+        "op1type": "nul",
+        "op2type": "flow",
+        "duration": "2",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 1220,
+        "y": 260,
+        "wires": [
+            [
+                "ca4cec5f.e2e0a",
+                "9c6faa39.65ddf8"
+            ]
+        ]
+    },
+    {
+        "id": "ca4cec5f.e2e0a",
+        "type": "function",
+        "z": "ba89bc21.914a5",
+        "name": "invertieren",
+        "func": "\nreturn {payload: msg.payload = 0 ? 1 : 0};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 1230,
+        "y": 320,
+        "wires": [
+            [
+                "c393bd32.8a77f"
+            ]
+        ]
+    },
+    {
+        "id": "c393bd32.8a77f",
+        "type": "trigger",
+        "z": "ba89bc21.914a5",
+        "name": "",
+        "op1": "",
+        "op2": "",
+        "op1type": "nul",
+        "op2type": "pay",
+        "duration": "1",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 1220,
+        "y": 380,
+        "wires": [
+            [
+                "f4759224.4bd5e"
             ]
         ]
     },
