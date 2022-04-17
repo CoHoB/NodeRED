@@ -1,0 +1,202 @@
+[
+    {
+        "id": "dd192374.a96bb",
+        "type": "http request",
+        "z": "42b34ee1.a253c",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://marantz/MainZone/index.put.asp",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "x": 810,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7a64024e.10d91c",
+        "type": "change",
+        "z": "42b34ee1.a253c",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "headers",
+                "pt": "msg",
+                "to": "Content-Type: text/html",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 300,
+        "wires": [
+            [
+                "dd192374.a96bb"
+            ]
+        ]
+    },
+    {
+        "id": "cead0633.f8d108",
+        "type": "ui_button",
+        "z": "42b34ee1.a253c",
+        "name": "Radio",
+        "group": "d57a5a9c.e2237",
+        "order": 10,
+        "width": 1,
+        "height": 1,
+        "passthru": false,
+        "label": "",
+        "tooltip": "",
+        "color": "#898989",
+        "bgcolor": "#333333",
+        "icon": "radio",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 190,
+        "y": 240,
+        "wires": [
+            [
+                "6a1e0190.c083e"
+            ]
+        ]
+    },
+    {
+        "id": "6a1e0190.c083e",
+        "type": "function",
+        "z": "42b34ee1.a253c",
+        "name": "Tuner",
+        "func": "return {payload: \"cmd0=PutZone_InputFunction/TUNER\"};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 390,
+        "y": 240,
+        "wires": [
+            [
+                "7a64024e.10d91c"
+            ]
+        ]
+    },
+    {
+        "id": "8f10d675.f8a478",
+        "type": "function",
+        "z": "42b34ee1.a253c",
+        "name": "-50",
+        "func": "return {payload: \"cmd0=PutMasterVolumeSet/-50\"};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 390,
+        "y": 300,
+        "wires": [
+            [
+                "7a64024e.10d91c"
+            ]
+        ]
+    },
+    {
+        "id": "a9ab5435.6510d8",
+        "type": "ui_button",
+        "z": "42b34ee1.a253c",
+        "name": "Lautstärke 30",
+        "group": "d57a5a9c.e2237",
+        "order": 11,
+        "width": 1,
+        "height": 1,
+        "passthru": false,
+        "label": "30",
+        "tooltip": "",
+        "color": "#898989",
+        "bgcolor": "#333333",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 220,
+        "y": 300,
+        "wires": [
+            [
+                "8f10d675.f8a478"
+            ]
+        ]
+    },
+    {
+        "id": "d833ed8.562e71",
+        "type": "ui_button",
+        "z": "42b34ee1.a253c",
+        "name": "Lautstärke 40",
+        "group": "d57a5a9c.e2237",
+        "order": 12,
+        "width": 1,
+        "height": 1,
+        "passthru": false,
+        "label": "40",
+        "tooltip": "",
+        "color": "#898989",
+        "bgcolor": "#333333",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 220,
+        "y": 340,
+        "wires": [
+            [
+                "d61a0194.d9a05"
+            ]
+        ]
+    },
+    {
+        "id": "d61a0194.d9a05",
+        "type": "function",
+        "z": "42b34ee1.a253c",
+        "name": "-40",
+        "func": "return {payload: \"cmd0=PutMasterVolumeSet/-40\"};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 390,
+        "y": 340,
+        "wires": [
+            [
+                "7a64024e.10d91c"
+            ]
+        ]
+    },
+    {
+        "id": "d57a5a9c.e2237",
+        "type": "ui_group",
+        "name": "Wohnzimmer",
+        "tab": "11d3c24e.d6aa9e",
+        "order": 1,
+        "disp": true,
+        "width": 8,
+        "collapse": false
+    },
+    {
+        "id": "11d3c24e.d6aa9e",
+        "type": "ui_tab",
+        "name": "Erdgeschoß",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    }
+]
