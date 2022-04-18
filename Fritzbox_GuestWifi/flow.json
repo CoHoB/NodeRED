@@ -1,0 +1,295 @@
+[
+    {
+        "id": "f368d27b.47d4c",
+        "type": "ui_switch",
+        "z": "c9e1cd83.b2a1a",
+        "name": "",
+        "label": "Gäste-WLAN",
+        "tooltip": "",
+        "group": "ab72a80a.4ed448",
+        "order": 17,
+        "width": 4,
+        "height": 1,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "num",
+        "onicon": "onicon",
+        "oncolor": "oncolor",
+        "offvalue": "0",
+        "offvalueType": "num",
+        "officon": "officon",
+        "offcolor": "offcolor",
+        "animate": false,
+        "x": 320,
+        "y": 340,
+        "wires": [
+            [
+                "e111acd0.61fd6",
+                "3e70863f.f5626a"
+            ]
+        ]
+    },
+    {
+        "id": "d23b9f04.fd22d",
+        "type": "comment",
+        "z": "c9e1cd83.b2a1a",
+        "name": "Gäste-WLAN",
+        "info": "",
+        "x": 160,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "5e24cac9.345bd4",
+        "type": "inject",
+        "z": "c9e1cd83.b2a1a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "900",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "{}",
+        "payloadType": "json",
+        "x": 180,
+        "y": 240,
+        "wires": [
+            [
+                "c96e38d.2dfc0c8"
+            ]
+        ]
+    },
+    {
+        "id": "87bafb4f.48d0f8",
+        "type": "function",
+        "z": "c9e1cd83.b2a1a",
+        "name": "Nachricht mit aktuellen Status erstellen",
+        "func": "let status = msg.payload.NewStatus;\nmsg = {};\nmsg.ui_control = {\n    onicon: \"fa-2x fa-wifi\",\n    oncolor: \"#097479\",\n    officon: \"fa-2x fa-wifi\",\n    offcolor: \"#898989\"\n}\n\nif (status === \"Up\") {\n    msg.payload = 1;\n} else{\n    msg.payload = 0;\n}    \n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 700,
+        "y": 240,
+        "wires": [
+            [
+                "f38912cb.fcb8c"
+            ]
+        ]
+    },
+    {
+        "id": "e111acd0.61fd6",
+        "type": "function",
+        "z": "c9e1cd83.b2a1a",
+        "name": "TR69-Nachricht erstellen",
+        "func": "var payload={NewEnable: msg.payload};\n\nreturn {payload: payload};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 560,
+        "y": 320,
+        "wires": [
+            [
+                "1393d931.553017"
+            ]
+        ]
+    },
+    {
+        "id": "db35c502.ed4628",
+        "type": "delay",
+        "z": "c9e1cd83.b2a1a",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "4",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 1010,
+        "y": 320,
+        "wires": [
+            [
+                "d6449727.5e76c8"
+            ]
+        ]
+    },
+    {
+        "id": "3e70863f.f5626a",
+        "type": "change",
+        "z": "c9e1cd83.b2a1a",
+        "name": "Umstellung aktiv",
+        "rules": [
+            {
+                "t": "set",
+                "p": "ui_control",
+                "pt": "msg",
+                "to": "{\"onicon\":\"fa-2x fa-wifi\",\"oncolor\":\"#ffd700\",\"officon\":\"fa-2x fa-wifi\",\"offcolor\":\"#ffd700\"}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 360,
+        "wires": [
+            [
+                "19300fa7.be5de"
+            ]
+        ]
+    },
+    {
+        "id": "d6449727.5e76c8",
+        "type": "link out",
+        "z": "c9e1cd83.b2a1a",
+        "name": "",
+        "links": [
+            "afa3c795.1436b8"
+        ],
+        "x": 1145,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "afa3c795.1436b8",
+        "type": "link in",
+        "z": "c9e1cd83.b2a1a",
+        "name": "",
+        "links": [
+            "d6449727.5e76c8"
+        ],
+        "x": 205,
+        "y": 280,
+        "wires": [
+            [
+                "c96e38d.2dfc0c8"
+            ]
+        ]
+    },
+    {
+        "id": "39d2be81.31d312",
+        "type": "link in",
+        "z": "c9e1cd83.b2a1a",
+        "name": "",
+        "links": [
+            "f38912cb.fcb8c",
+            "19300fa7.be5de"
+        ],
+        "x": 205,
+        "y": 340,
+        "wires": [
+            [
+                "f368d27b.47d4c"
+            ]
+        ]
+    },
+    {
+        "id": "f38912cb.fcb8c",
+        "type": "link out",
+        "z": "c9e1cd83.b2a1a",
+        "name": "",
+        "links": [
+            "39d2be81.31d312"
+        ],
+        "x": 885,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "19300fa7.be5de",
+        "type": "link out",
+        "z": "c9e1cd83.b2a1a",
+        "name": "",
+        "links": [
+            "39d2be81.31d312"
+        ],
+        "x": 645,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "1393d931.553017",
+        "type": "fritzbox-in",
+        "z": "c9e1cd83.b2a1a",
+        "device": "b9d5cfa7.dc85d",
+        "name": "Gäste-WLAN setzen",
+        "service": "urn:dslforum-org:service:WLANConfiguration:1",
+        "action": "SetEnable",
+        "arguments": "{\n  \"NewEnable\": \"value\"\n}",
+        "x": 790,
+        "y": 320,
+        "wires": [
+            [
+                "db35c502.ed4628"
+            ]
+        ]
+    },
+    {
+        "id": "c96e38d.2dfc0c8",
+        "type": "fritzbox-in",
+        "z": "c9e1cd83.b2a1a",
+        "device": "b9d5cfa7.dc85d",
+        "name": "Status Gäste-WLAN abfragen",
+        "service": "urn:dslforum-org:service:WLANConfiguration:1",
+        "action": "GetInfo",
+        "arguments": "{}",
+        "x": 400,
+        "y": 240,
+        "wires": [
+            [
+                "87bafb4f.48d0f8"
+            ]
+        ]
+    },
+    {
+        "id": "ab72a80a.4ed448",
+        "type": "ui_group",
+        "name": "Allgemein",
+        "tab": "c7b137bf.943448",
+        "order": 1,
+        "disp": true,
+        "width": 8,
+        "collapse": false
+    },
+    {
+        "id": "b9d5cfa7.dc85d",
+        "type": "fritzbox-config",
+        "name": "DSL-Router",
+        "host": "192.168.178.1",
+        "port": "49000",
+        "ssl": false,
+        "user": "doesnotexist"
+    },
+    {
+        "id": "c7b137bf.943448",
+        "type": "ui_tab",
+        "name": "System",
+        "icon": "dashboard",
+        "order": 6,
+        "disabled": false,
+        "hidden": false
+    }
+]
