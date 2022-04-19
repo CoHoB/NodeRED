@@ -1,0 +1,144 @@
+[
+    {
+        "id": "ab159924.2e29e8",
+        "type": "inject",
+        "z": "c9e1cd83.b2a1a",
+        "name": "an",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.1",
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 190,
+        "y": 960,
+        "wires": [
+            [
+                "c93884d0.feed28"
+            ]
+        ]
+    },
+    {
+        "id": "c93884d0.feed28",
+        "type": "function",
+        "z": "c9e1cd83.b2a1a",
+        "name": "Nachricht mit aktuellen Status erstellen",
+        "func": "let status = msg.payload;\nmsg = {};\n\nif (status == 2) {\n    msg.ui_control = {\n        onicon: \"fa-2x fa-wifi\",\n        oncolor: \"#ffd700\",\n        officon: \"fa-2x fa-wifi\",\n        offcolor: \"#ffd700\"\n    }\n    msg.payload = 1;\n    \n} else {\n    msg.ui_control = {\n        onicon: \"fa-2x fa-wifi\",\n        oncolor: \"lightgreen\",\n        officon: \"fa-2x fa-wifi\",\n        offcolor: \"#898989\"\n    }\n    msg.payload = status;\n}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 430,
+        "y": 1000,
+        "wires": [
+            [
+                "329c84a2.30b45c"
+            ]
+        ]
+    },
+    {
+        "id": "329c84a2.30b45c",
+        "type": "ui_switch",
+        "z": "c9e1cd83.b2a1a",
+        "name": "",
+        "label": "Gäste-WLAN",
+        "tooltip": "",
+        "group": "d8715.275e38ec",
+        "order": 17,
+        "width": 4,
+        "height": 1,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "1",
+        "onvalueType": "num",
+        "onicon": "onicon",
+        "oncolor": "oncolor",
+        "offvalue": "0",
+        "offvalueType": "num",
+        "officon": "officon",
+        "offcolor": "offcolor",
+        "animate": false,
+        "x": 690,
+        "y": 1000,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d4117c5f.95f26",
+        "type": "inject",
+        "z": "c9e1cd83.b2a1a",
+        "name": "aus",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "0.1",
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 190,
+        "y": 1000,
+        "wires": [
+            [
+                "c93884d0.feed28"
+            ]
+        ]
+    },
+    {
+        "id": "9fff6ef3.45cb8",
+        "type": "inject",
+        "z": "c9e1cd83.b2a1a",
+        "name": "sonstige",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "0.1",
+        "topic": "",
+        "payload": "2",
+        "payloadType": "num",
+        "x": 200,
+        "y": 1040,
+        "wires": [
+            [
+                "c93884d0.feed28"
+            ]
+        ]
+    },
+    {
+        "id": "d8715.275e38ec",
+        "type": "ui_group",
+        "name": "CoHoB",
+        "tab": "142268d8.42f917",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": false
+    },
+    {
+        "id": "142268d8.42f917",
+        "type": "ui_tab",
+        "name": "UI",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
