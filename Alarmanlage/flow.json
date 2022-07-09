@@ -1,0 +1,1314 @@
+[
+    {
+        "id": "9a3e14c7.0aab88",
+        "type": "comment",
+        "z": "e0a0ac40.5665d",
+        "name": "Sicherheitslevel",
+        "info": "",
+        "x": 100,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "d070710d.45048",
+        "type": "ui_dropdown",
+        "z": "e0a0ac40.5665d",
+        "name": "",
+        "label": "Schutzlevel",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "ab72a80a.4ed448",
+        "order": 19,
+        "width": 4,
+        "height": 1,
+        "passthru": false,
+        "multiple": false,
+        "options": [
+            {
+                "label": "Aus",
+                "value": 0,
+                "type": "num"
+            },
+            {
+                "label": "Hüllschutz",
+                "value": 1,
+                "type": "num"
+            },
+            {
+                "label": "Vollschutz",
+                "value": 2,
+                "type": "num"
+            }
+        ],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 350,
+        "y": 160,
+        "wires": [
+            [
+                "7ff43e4e.dc265"
+            ]
+        ]
+    },
+    {
+        "id": "73183673.39d518",
+        "type": "inject",
+        "z": "e0a0ac40.5665d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "security.level",
+        "payloadType": "global",
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "d070710d.45048"
+            ]
+        ],
+        "info": "nach Neustart in WebUI setzen"
+    },
+    {
+        "id": "2bc22912.28bd56",
+        "type": "link in",
+        "z": "e0a0ac40.5665d",
+        "name": "security.level",
+        "links": [
+            "2570df8a.6fd31",
+            "29e8090f.df9866",
+            "2a8b6ae9.83a446",
+            "65fadf5b.25268",
+            "77870ba9.bc1b84",
+            "13f54a38.a85436",
+            "92a71d51.547fe",
+            "fbd29414.dde408",
+            "9b76ab15.183d88"
+        ],
+        "x": 395,
+        "y": 120,
+        "wires": [
+            [
+                "7ff43e4e.dc265"
+            ]
+        ]
+    },
+    {
+        "id": "7ff43e4e.dc265",
+        "type": "switch",
+        "z": "e0a0ac40.5665d",
+        "name": "Level:\\n -0\\n -1\\n -2",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "num"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 3,
+        "x": 510,
+        "y": 160,
+        "wires": [
+            [
+                "7a713593.d4eabc",
+                "385c2fba.e0f27"
+            ],
+            [
+                "8f57f748.3978e8"
+            ],
+            [
+                "8f57f748.3978e8"
+            ]
+        ]
+    },
+    {
+        "id": "26685ee5.965f12",
+        "type": "link in",
+        "z": "e0a0ac40.5665d",
+        "name": "securityBreach.hull",
+        "links": [
+            "4218f7d7.9185d8",
+            "42b36930.288158",
+            "4b25d8d5.068558",
+            "8c2d983e.b125a8",
+            "907af199.3d16b",
+            "a3a37b8f.63e6d8",
+            "d90ee5b5.c2f098"
+        ],
+        "x": 230,
+        "y": 720,
+        "wires": [
+            [
+                "5efc23cd.192aac"
+            ]
+        ],
+        "icon": "font-awesome/fa-bell-o",
+        "l": true
+    },
+    {
+        "id": "506b3214.9e91bc",
+        "type": "link in",
+        "z": "e0a0ac40.5665d",
+        "name": "securityBreach.full",
+        "links": [],
+        "x": 230,
+        "y": 780,
+        "wires": [
+            [
+                "c6ff2c28.c8243"
+            ]
+        ],
+        "icon": "font-awesome/fa-bell-o",
+        "l": true
+    },
+    {
+        "id": "1ade54da.9f281b",
+        "type": "switch",
+        "z": "e0a0ac40.5665d",
+        "name": "Alarmlevel",
+        "property": "security.level",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "num"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 630,
+        "y": 720,
+        "wires": [
+            [
+                "9e21dc45.046cc"
+            ],
+            [
+                "9e21dc45.046cc"
+            ]
+        ]
+    },
+    {
+        "id": "9e21dc45.046cc",
+        "type": "trigger",
+        "z": "e0a0ac40.5665d",
+        "name": "",
+        "op1": "",
+        "op2": "",
+        "op1type": "pay",
+        "op2type": "pay",
+        "duration": "20",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 2,
+        "x": 830,
+        "y": 740,
+        "wires": [
+            [
+                "c2c502a9.0af99"
+            ],
+            [
+                "1975c044.dbadb"
+            ]
+        ]
+    },
+    {
+        "id": "1975c044.dbadb",
+        "type": "switch",
+        "z": "e0a0ac40.5665d",
+        "name": "Alarmlevel:\\n -1\\n -2\\n -sonst",
+        "property": "security.level",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "num"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 3,
+        "x": 1010,
+        "y": 780,
+        "wires": [
+            [
+                "bc060750.1f6548"
+            ],
+            [
+                "bc060750.1f6548"
+            ],
+            [
+                "2d98a38c.c5608c"
+            ]
+        ]
+    },
+    {
+        "id": "479c5b82.486bf4",
+        "type": "comment",
+        "z": "e0a0ac40.5665d",
+        "name": "Warnung",
+        "info": "",
+        "x": 1080,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "cff21839.bb6108",
+        "type": "link in",
+        "z": "e0a0ac40.5665d",
+        "name": "alarm.off",
+        "links": [
+            "2d98a38c.c5608c",
+            "687f14d6.aa52ec",
+            "fbd29414.dde408",
+            "7a713593.d4eabc"
+        ],
+        "x": 200,
+        "y": 1120,
+        "wires": [
+            [
+                "c3d954d9.1aa348",
+                "bc536de2.46c53"
+            ]
+        ],
+        "icon": "font-awesome/fa-bell-slash",
+        "l": true
+    },
+    {
+        "id": "d419a71e.ac08a8",
+        "type": "ui_switch",
+        "z": "e0a0ac40.5665d",
+        "name": "",
+        "label": "Alarmierung",
+        "tooltip": "",
+        "group": "ab72a80a.4ed448",
+        "order": 20,
+        "width": 4,
+        "height": 1,
+        "passthru": false,
+        "decouple": "true",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "fa-bell-o fa-2x",
+        "oncolor": "red",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "fa-bell-slash-o fa-2x",
+        "offcolor": "#898989",
+        "animate": false,
+        "x": 530,
+        "y": 1180,
+        "wires": [
+            [
+                "f20beeb7.9d94e"
+            ]
+        ]
+    },
+    {
+        "id": "bc060750.1f6548",
+        "type": "link out",
+        "z": "e0a0ac40.5665d",
+        "name": "",
+        "links": [
+            "5467ac79.9c0864"
+        ],
+        "x": 1135,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "5467ac79.9c0864",
+        "type": "link in",
+        "z": "e0a0ac40.5665d",
+        "name": "alarm.on",
+        "links": [
+            "bc060750.1f6548"
+        ],
+        "x": 200,
+        "y": 1240,
+        "wires": [
+            [
+                "4622beb2.6fff1",
+                "b56c6781.705058"
+            ]
+        ],
+        "icon": "font-awesome/fa-bell",
+        "l": true
+    },
+    {
+        "id": "2d98a38c.c5608c",
+        "type": "link out",
+        "z": "e0a0ac40.5665d",
+        "name": "",
+        "links": [
+            "cff21839.bb6108"
+        ],
+        "x": 1135,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "753d621a.0f64cc",
+        "type": "link in",
+        "z": "e0a0ac40.5665d",
+        "name": "alarm.warning",
+        "links": [
+            "c2c502a9.0af99",
+            "88f926f8.890008"
+        ],
+        "x": 210,
+        "y": 1020,
+        "wires": [
+            [
+                "d7d82752.63b978"
+            ]
+        ],
+        "icon": "font-awesome/fa-bell",
+        "l": true
+    },
+    {
+        "id": "c2c502a9.0af99",
+        "type": "link out",
+        "z": "e0a0ac40.5665d",
+        "name": "",
+        "links": [
+            "753d621a.0f64cc"
+        ],
+        "x": 975,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "c1b37ef0.f1273",
+        "type": "switch",
+        "z": "e0a0ac40.5665d",
+        "name": "Alarmlevel",
+        "property": "security.level",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "2",
+                "vt": "num"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 1,
+        "x": 630,
+        "y": 780,
+        "wires": [
+            [
+                "9e21dc45.046cc"
+            ]
+        ]
+    },
+    {
+        "id": "687f14d6.aa52ec",
+        "type": "link out",
+        "z": "e0a0ac40.5665d",
+        "name": "",
+        "links": [
+            "cff21839.bb6108",
+            "9e216a09.0d9968"
+        ],
+        "x": 835,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "f20beeb7.9d94e",
+        "type": "change",
+        "z": "e0a0ac40.5665d",
+        "name": "reset & aus",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "reset",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 710,
+        "y": 1180,
+        "wires": [
+            [
+                "687f14d6.aa52ec"
+            ]
+        ]
+    },
+    {
+        "id": "9e216a09.0d9968",
+        "type": "link in",
+        "z": "e0a0ac40.5665d",
+        "name": "",
+        "links": [
+            "687f14d6.aa52ec"
+        ],
+        "x": 795,
+        "y": 800,
+        "wires": [
+            [
+                "9e21dc45.046cc"
+            ]
+        ]
+    },
+    {
+        "id": "b59a31b3.ab6c4",
+        "type": "comment",
+        "z": "e0a0ac40.5665d",
+        "name": "Auslöser",
+        "info": "",
+        "x": 80,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "5cd784ef.7cbdbc",
+        "type": "comment",
+        "z": "e0a0ac40.5665d",
+        "name": "Aktionen",
+        "info": "",
+        "x": 80,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "118543f2.7f7eec",
+        "type": "ccu-signal",
+        "z": "e0a0ac40.5665d",
+        "name": "Sirene: Warnung akustisch + optisch",
+        "iface": "HmIP-RF",
+        "channel": "000AD8A99DDB93:3",
+        "chime": "",
+        "length": 108000,
+        "repeat": 1,
+        "repeatType": "num",
+        "volume": 100,
+        "volumeType": "num",
+        "line1": "",
+        "line2": "",
+        "line3": "",
+        "signal": "",
+        "channelType": "ALARM_SWITCH_VIRTUAL_RECEIVER",
+        "led": "",
+        "acousticAlarmSelection": "INTERNALLY_ARMED",
+        "durationUnit": "S",
+        "durationValue": "30",
+        "durationValueType": "num",
+        "rampTimeUnit": "S",
+        "rampTimeValue": 0,
+        "rampTimeValueType": "num",
+        "repetitions": 0,
+        "dimmerColor": 0,
+        "dimmerLevel": 100,
+        "dimmerList": [],
+        "soundLevel": 50,
+        "soundLevelType": "num",
+        "soundList": [],
+        "opticalAlarmSelection": "BLINKING_ALTERNATELY_REPEATING",
+        "ccuConfig": "38263145.35ea0e",
+        "x": 690,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "bc536de2.46c53",
+        "type": "ccu-signal",
+        "z": "e0a0ac40.5665d",
+        "name": "Sirene Flur aus",
+        "iface": "HmIP-RF",
+        "channel": "000AD8A99DDB93:3",
+        "chime": "",
+        "length": 108000,
+        "repeat": 1,
+        "repeatType": "num",
+        "volume": 100,
+        "volumeType": "num",
+        "line1": "",
+        "line2": "",
+        "line3": "",
+        "signal": "",
+        "channelType": "ALARM_SWITCH_VIRTUAL_RECEIVER",
+        "led": "",
+        "acousticAlarmSelection": "DISABLE_ACOUSTIC_SIGNAL",
+        "durationUnit": "S",
+        "durationValue": 0,
+        "durationValueType": "num",
+        "rampTimeUnit": "S",
+        "rampTimeValue": 0,
+        "rampTimeValueType": "num",
+        "repetitions": 0,
+        "dimmerColor": 0,
+        "dimmerLevel": 100,
+        "dimmerList": [],
+        "soundLevel": 50,
+        "soundLevelType": "num",
+        "soundList": [],
+        "opticalAlarmSelection": "DISABLE_OPTICAL_SIGNAL",
+        "ccuConfig": "38263145.35ea0e",
+        "x": 400,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "b56c6781.705058",
+        "type": "ccu-signal",
+        "z": "e0a0ac40.5665d",
+        "name": "Sirene Flur Alarm Licht",
+        "iface": "HmIP-RF",
+        "channel": "000AD8A99DDB93:3",
+        "chime": "",
+        "length": 108000,
+        "repeat": 1,
+        "repeatType": "num",
+        "volume": 100,
+        "volumeType": "num",
+        "line1": "",
+        "line2": "",
+        "line3": "",
+        "signal": "",
+        "channelType": "ALARM_SWITCH_VIRTUAL_RECEIVER",
+        "led": "",
+        "acousticAlarmSelection": "FREQUENCY_RISING",
+        "durationUnit": "M",
+        "durationValue": "30",
+        "durationValueType": "num",
+        "rampTimeUnit": "S",
+        "rampTimeValue": 0,
+        "rampTimeValueType": "num",
+        "repetitions": 0,
+        "dimmerColor": 0,
+        "dimmerLevel": 100,
+        "dimmerList": [],
+        "soundLevel": 50,
+        "soundLevelType": "num",
+        "soundList": [],
+        "opticalAlarmSelection": "FLASHING_BOTH_REPEATING",
+        "ccuConfig": "38263145.35ea0e",
+        "x": 420,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "f00c3b6b.fc3068",
+        "type": "switch",
+        "z": "e0a0ac40.5665d",
+        "name": "alle abwesend?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 400,
+        "y": 500,
+        "wires": [
+            [
+                "7fa064a8.3be84c"
+            ],
+            [
+                "bedaabb9.249f38"
+            ]
+        ]
+    },
+    {
+        "id": "92a71d51.547fe",
+        "type": "link out",
+        "z": "e0a0ac40.5665d",
+        "name": "",
+        "links": [
+            "2bc22912.28bd56",
+            "cef36961.955a28"
+        ],
+        "x": 755,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "bedaabb9.249f38",
+        "type": "change",
+        "z": "e0a0ac40.5665d",
+        "name": "Alarm aus",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 600,
+        "y": 520,
+        "wires": [
+            [
+                "92a71d51.547fe"
+            ]
+        ]
+    },
+    {
+        "id": "7fa064a8.3be84c",
+        "type": "change",
+        "z": "e0a0ac40.5665d",
+        "name": "Hüllschutz an",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 600,
+        "y": 480,
+        "wires": [
+            [
+                "92a71d51.547fe"
+            ]
+        ]
+    },
+    {
+        "id": "bf1df4fd.0f9888",
+        "type": "link in",
+        "z": "e0a0ac40.5665d",
+        "name": "",
+        "links": [
+            "9b664988.a003f8",
+            "e7b8817f.65f08"
+        ],
+        "x": 235,
+        "y": 500,
+        "wires": [
+            [
+                "f00c3b6b.fc3068"
+            ]
+        ]
+    },
+    {
+        "id": "c6ff2c28.c8243",
+        "type": "change",
+        "z": "e0a0ac40.5665d",
+        "name": "Alarmtyp setzen",
+        "rules": [
+            {
+                "t": "set",
+                "p": "alarmType",
+                "pt": "msg",
+                "to": "full",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "security.breachType",
+                "pt": "global",
+                "to": "full",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 440,
+        "y": 780,
+        "wires": [
+            [
+                "c1b37ef0.f1273"
+            ]
+        ]
+    },
+    {
+        "id": "5efc23cd.192aac",
+        "type": "change",
+        "z": "e0a0ac40.5665d",
+        "name": "Alarmtyp setzen",
+        "rules": [
+            {
+                "t": "set",
+                "p": "alarmType",
+                "pt": "msg",
+                "to": "hull",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "security.breachType",
+                "pt": "global",
+                "to": "hull",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 440,
+        "y": 720,
+        "wires": [
+            [
+                "1ade54da.9f281b"
+            ]
+        ]
+    },
+    {
+        "id": "c3d954d9.1aa348",
+        "type": "change",
+        "z": "e0a0ac40.5665d",
+        "name": "aus",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 1160,
+        "wires": [
+            [
+                "d419a71e.ac08a8"
+            ]
+        ]
+    },
+    {
+        "id": "4622beb2.6fff1",
+        "type": "change",
+        "z": "e0a0ac40.5665d",
+        "name": "an",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 370,
+        "y": 1200,
+        "wires": [
+            [
+                "d419a71e.ac08a8"
+            ]
+        ]
+    },
+    {
+        "id": "1213189c.c5a887",
+        "type": "switch",
+        "z": "e0a0ac40.5665d",
+        "name": "noch offen?",
+        "property": "stillOneOpen",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 970,
+        "y": 200,
+        "wires": [
+            [],
+            [
+                "1fd84ef9.4fb821"
+            ]
+        ]
+    },
+    {
+        "id": "385c2fba.e0f27",
+        "type": "change",
+        "z": "e0a0ac40.5665d",
+        "name": "reset delaying",
+        "rules": [
+            {
+                "t": "set",
+                "p": "#:(memory)::security.delaying",
+                "pt": "flow",
+                "to": "false",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "reset",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 700,
+        "y": 120,
+        "wires": [
+            [
+                "1fd84ef9.4fb821"
+            ]
+        ]
+    },
+    {
+        "id": "8b8aee1d.5b8e8",
+        "type": "change",
+        "z": "e0a0ac40.5665d",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "security.level",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 360,
+        "wires": [
+            [
+                "776f68ab.a362e8"
+            ]
+        ]
+    },
+    {
+        "id": "7a713593.d4eabc",
+        "type": "link out",
+        "z": "e0a0ac40.5665d",
+        "name": "",
+        "links": [
+            "cff21839.bb6108",
+            "522c2848.450638"
+        ],
+        "x": 635,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "cef36961.955a28",
+        "type": "link in",
+        "z": "e0a0ac40.5665d",
+        "name": "",
+        "links": [
+            "d7ef1eb.4207de",
+            "9b76ab15.183d88",
+            "92a71d51.547fe"
+        ],
+        "x": 215,
+        "y": 120,
+        "wires": [
+            [
+                "d070710d.45048"
+            ]
+        ]
+    },
+    {
+        "id": "8f57f748.3978e8",
+        "type": "function",
+        "z": "e0a0ac40.5665d",
+        "name": "offene EG-Fenster ermitteln",
+        "func": "let peripheralsState = global.get(\"peripherals.states\", \"memory\") || 0;\nmsg.stillOneOpen = false;\nif (peripheralsState != 0) {\n    for (let key in peripheralsState) {\n        if (peripheralsState[key].state && ( /^(Wohnzimmer|Küche|Flur)/.test(key) ) ) {\n            msg.stillOneOpen = true;\n            break;\n        }\n    }\n}\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 740,
+        "y": 200,
+        "wires": [
+            [
+                "1213189c.c5a887"
+            ]
+        ]
+    },
+    {
+        "id": "1fd84ef9.4fb821",
+        "type": "delay",
+        "z": "e0a0ac40.5665d",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "30",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "x": 1210,
+        "y": 200,
+        "wires": [
+            [
+                "51dc6783.555088"
+            ]
+        ]
+    },
+    {
+        "id": "51dc6783.555088",
+        "type": "link out",
+        "z": "e0a0ac40.5665d",
+        "name": "",
+        "links": [
+            "44bc7dc7.679704",
+            "522c2848.450638"
+        ],
+        "x": 1355,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "522c2848.450638",
+        "type": "link in",
+        "z": "e0a0ac40.5665d",
+        "name": "",
+        "links": [
+            "51dc6783.555088",
+            "7a713593.d4eabc"
+        ],
+        "x": 235,
+        "y": 360,
+        "wires": [
+            [
+                "8b8aee1d.5b8e8"
+            ]
+        ]
+    },
+    {
+        "id": "8b69de3e.22fc",
+        "type": "comment",
+        "z": "e0a0ac40.5665d",
+        "name": "setzen und benachrichtigen",
+        "info": "",
+        "x": 260,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "e0057472.a1d798",
+        "type": "comment",
+        "z": "e0a0ac40.5665d",
+        "name": "automatisch de-/aktivieren via WLAN-Präsenz",
+        "info": "",
+        "x": 310,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "d7d82752.63b978",
+        "type": "switch",
+        "z": "e0a0ac40.5665d",
+        "name": "keiner zu Hause?",
+        "property": "residents.away",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 1020,
+        "wires": [
+            [
+                "118543f2.7f7eec"
+            ],
+            [
+                "1cdbc896.4acf37"
+            ]
+        ]
+    },
+    {
+        "id": "1cdbc896.4acf37",
+        "type": "ccu-signal",
+        "z": "e0a0ac40.5665d",
+        "name": "Sirene: Warnung optisch",
+        "iface": "HmIP-RF",
+        "channel": "000AD8A99DDB93:3",
+        "chime": "",
+        "length": 108000,
+        "repeat": 1,
+        "repeatType": "num",
+        "volume": 100,
+        "volumeType": "num",
+        "line1": "",
+        "line2": "",
+        "line3": "",
+        "signal": "",
+        "channelType": "ALARM_SWITCH_VIRTUAL_RECEIVER",
+        "led": "",
+        "acousticAlarmSelection": "DISABLE_ACOUSTIC_SIGNAL",
+        "durationUnit": "S",
+        "durationValue": "30",
+        "durationValueType": "num",
+        "rampTimeUnit": "S",
+        "rampTimeValue": 0,
+        "rampTimeValueType": "num",
+        "repetitions": 0,
+        "dimmerColor": 0,
+        "dimmerLevel": 100,
+        "dimmerList": [],
+        "soundLevel": 50,
+        "soundLevelType": "num",
+        "soundList": [],
+        "opticalAlarmSelection": "BLINKING_ALTERNATELY_REPEATING",
+        "ccuConfig": "38263145.35ea0e",
+        "x": 650,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "776f68ab.a362e8",
+        "type": "link out",
+        "z": "e0a0ac40.5665d",
+        "name": "hier Benachrichtigung",
+        "links": [],
+        "x": 640,
+        "y": 360,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "3455d9de.09a186",
+        "type": "comment",
+        "z": "e0a0ac40.5665d",
+        "name": "Alarm scharf",
+        "info": "",
+        "x": 1450,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "a9dd625b.1f3b",
+        "type": "group",
+        "z": "e0a0ac40.5665d",
+        "name": "",
+        "style": {
+            "label": true,
+            "fill": "#d1d1d1"
+        },
+        "nodes": [
+            "130d9390.cb96cc"
+        ],
+        "x": 754,
+        "y": 319,
+        "w": 232,
+        "h": 82
+    },
+    {
+        "id": "130d9390.cb96cc",
+        "type": "change",
+        "z": "e0a0ac40.5665d",
+        "g": "a9dd625b.1f3b",
+        "name": "Bsp: Chatnachricht",
+        "rules": [
+            {
+                "t": "set",
+                "p": "chatId",
+                "pt": "msg",
+                "to": "notificationReceiver.alarms",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "0",
+                "fromt": "num",
+                "to": "🔕 Schutz ist ausgeschaltet",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "1",
+                "fromt": "num",
+                "to": "🔔 Hüllschutz aktiviert",
+                "tot": "str"
+            },
+            {
+                "t": "change",
+                "p": "payload",
+                "pt": "msg",
+                "from": "2",
+                "fromt": "num",
+                "to": "🔔 Vollschutz aktiviert",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "message",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "sentMessageId",
+                "pt": "msg",
+                "to": "security.sentMessageId",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 870,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ab72a80a.4ed448",
+        "type": "ui_group",
+        "name": "Allgemein",
+        "tab": "c7b137bf.943448",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": false
+    },
+    {
+        "id": "38263145.35ea0e",
+        "type": "ccu-connection",
+        "name": "cohob",
+        "host": "localhost",
+        "regaEnabled": true,
+        "bcrfEnabled": false,
+        "iprfEnabled": true,
+        "virtEnabled": false,
+        "bcwiEnabled": false,
+        "cuxdEnabled": false,
+        "regaPoll": true,
+        "regaInterval": "30",
+        "rpcPingTimeout": "60",
+        "rpcInitAddress": "127.0.0.1",
+        "rpcServerHost": "127.0.0.1",
+        "rpcBinPort": "2047",
+        "rpcXmlPort": "2048",
+        "tls": false,
+        "inSecure": false,
+        "authentication": false,
+        "username": "",
+        "password": "",
+        "queueTimeout": "5000",
+        "queuePause": "250",
+        "contextStore": ""
+    },
+    {
+        "id": "c7b137bf.943448",
+        "type": "ui_tab",
+        "name": "System",
+        "icon": "dashboard",
+        "order": 6,
+        "disabled": false,
+        "hidden": true
+    }
+]
