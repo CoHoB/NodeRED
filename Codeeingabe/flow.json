@@ -1,0 +1,269 @@
+[
+    {
+        "id": "7e227a55.1764e4",
+        "type": "ccu-rpc-event",
+        "z": "76397976.ad67d8",
+        "name": "6fach-Taster",
+        "iface": "",
+        "ccuConfig": "38263145.35ea0e",
+        "rooms": "Flur",
+        "roomsRx": "str",
+        "functions": "",
+        "functionsRx": "str",
+        "device": "",
+        "deviceRx": "str",
+        "deviceName": "eg_flur_taster",
+        "deviceNameRx": "str",
+        "deviceType": "",
+        "deviceTypeRx": "str",
+        "channel": "",
+        "channelRx": "str",
+        "channelName": "",
+        "channelNameRx": "str",
+        "channelType": "",
+        "channelTypeRx": "str",
+        "channelIndex": "",
+        "channelIndexRx": "str",
+        "datapoint": "PRESS_SHORT",
+        "datapointRx": "str",
+        "change": false,
+        "working": false,
+        "cache": false,
+        "topic": "${CCU}/${Interface}/${channelName}/${datapoint}",
+        "x": 130,
+        "y": 200,
+        "wires": [
+            [
+                "dc5e00bc.aa03a",
+                "d1cbe2aa.85912"
+            ]
+        ]
+    },
+    {
+        "id": "fc3f0b09.30d308",
+        "type": "change",
+        "z": "76397976.ad67d8",
+        "name": "erste Ziffer merken",
+        "rules": [
+            {
+                "t": "set",
+                "p": "keypad.value",
+                "pt": "flow",
+                "to": "channelIndex",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 650,
+        "y": 180,
+        "wires": [
+            [
+                "81ff5a11.93e628"
+            ]
+        ]
+    },
+    {
+        "id": "dc5e00bc.aa03a",
+        "type": "trigger",
+        "z": "76397976.ad67d8",
+        "name": "10s Zeit für die Eingabe",
+        "op1": "",
+        "op2": "false",
+        "op1type": "pay",
+        "op2type": "bool",
+        "duration": "10",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 2,
+        "x": 390,
+        "y": 200,
+        "wires": [
+            [
+                "fc3f0b09.30d308"
+            ],
+            [
+                "58be0ef2.656c7"
+            ]
+        ]
+    },
+    {
+        "id": "58be0ef2.656c7",
+        "type": "change",
+        "z": "76397976.ad67d8",
+        "name": "Zurücksetzen",
+        "rules": [
+            {
+                "t": "set",
+                "p": "keypad.value",
+                "pt": "flow",
+                "to": "",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 640,
+        "y": 220,
+        "wires": [
+            [
+                "81ff5a11.93e628"
+            ]
+        ]
+    },
+    {
+        "id": "d1cbe2aa.85912",
+        "type": "function",
+        "z": "76397976.ad67d8",
+        "name": "PIN ermitteln",
+        "func": "let isValid = flow.get(\"keypad.valid\", \"memory\") || false;\nif (isValid) {\n    let value = flow.get(\"keypad.value\", \"memory\").toString() + msg.channelIndex\n    if (value.length == 4) {\n        return {payload: value};\n    }\n    flow.set(\"keypad.value\", value, \"memory\");\n\n} else {\n    flow.set(\"keypad.value\", \"\", \"memory\");\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 350,
+        "y": 300,
+        "wires": [
+            [
+                "a1f9d9e.46c9728"
+            ]
+        ]
+    },
+    {
+        "id": "81ff5a11.93e628",
+        "type": "change",
+        "z": "76397976.ad67d8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "keypad.valid",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 920,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a1f9d9e.46c9728",
+        "type": "switch",
+        "z": "76397976.ad67d8",
+        "name": "welche PIN?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1234",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "5678",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 3,
+        "x": 530,
+        "y": 300,
+        "wires": [
+            [
+                "a2fae190.fd1fe"
+            ],
+            [
+                "7bca97cb.f90598"
+            ],
+            [
+                "28e233d.2a405cc"
+            ]
+        ]
+    },
+    {
+        "id": "a2fae190.fd1fe",
+        "type": "link out",
+        "z": "76397976.ad67d8",
+        "name": "Aktion 1",
+        "links": [],
+        "x": 720,
+        "y": 260,
+        "wires": [],
+        "icon": "font-awesome/fa-bell-o",
+        "l": true
+    },
+    {
+        "id": "7bca97cb.f90598",
+        "type": "link out",
+        "z": "76397976.ad67d8",
+        "name": "Aktion 2",
+        "links": [],
+        "x": 720,
+        "y": 300,
+        "wires": [],
+        "icon": "font-awesome/fa-bell",
+        "l": true
+    },
+    {
+        "id": "28e233d.2a405cc",
+        "type": "link out",
+        "z": "76397976.ad67d8",
+        "name": "Falscheingabe",
+        "links": [],
+        "x": 740,
+        "y": 340,
+        "wires": [],
+        "icon": "font-awesome/fa-bullhorn",
+        "l": true
+    },
+    {
+        "id": "38263145.35ea0e",
+        "type": "ccu-connection",
+        "name": "cohob",
+        "host": "localhost",
+        "regaEnabled": true,
+        "bcrfEnabled": false,
+        "iprfEnabled": true,
+        "virtEnabled": false,
+        "bcwiEnabled": false,
+        "cuxdEnabled": false,
+        "regaPoll": true,
+        "regaInterval": "30",
+        "rpcPingTimeout": "60",
+        "rpcInitAddress": "127.0.0.1",
+        "rpcServerHost": "127.0.0.1",
+        "rpcBinPort": "2047",
+        "rpcXmlPort": "2048",
+        "tls": false,
+        "inSecure": false,
+        "authentication": false,
+        "username": "",
+        "password": "",
+        "queueTimeout": "5000",
+        "queuePause": "250",
+        "contextStore": ""
+    }
+]
