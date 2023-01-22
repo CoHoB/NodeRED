@@ -1,0 +1,792 @@
+[
+    {
+        "id": "2fa3e06f.6fe44",
+        "type": "subflow",
+        "name": "Heizprofilauswahl",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 320,
+                "y": 600,
+                "wires": [
+                    {
+                        "id": "3383861f.4d1f8a"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1320,
+                "y": 500,
+                "wires": [
+                    {
+                        "id": "674ac66f.89ccd8",
+                        "port": 0
+                    },
+                    {
+                        "id": "b0d9ea66.06eb48",
+                        "port": 0
+                    },
+                    {
+                        "id": "98537835.70af58",
+                        "port": 0
+                    },
+                    {
+                        "id": "fa63f25.725b21",
+                        "port": 0
+                    },
+                    {
+                        "id": "a2e3edf8.431d5",
+                        "port": 0
+                    },
+                    {
+                        "id": "56b6fee9.05e01",
+                        "port": 0
+                    },
+                    {
+                        "id": "51498a0.4470e78",
+                        "port": 0
+                    },
+                    {
+                        "id": "7a97568a.392878",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "color": "#3FADB5",
+        "icon": "node-red-dashboard/ui_slider.png"
+    },
+    {
+        "id": "78e6fcba.dcbd14",
+        "type": "switch",
+        "z": "2fa3e06f.6fe44",
+        "name": "Profilauswahl",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "work",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "home",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "party",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 4,
+        "x": 770,
+        "y": 500,
+        "wires": [
+            [
+                "98537835.70af58",
+                "674ac66f.89ccd8"
+            ],
+            [
+                "98537835.70af58",
+                "b0d9ea66.06eb48"
+            ],
+            [
+                "98537835.70af58",
+                "fa63f25.725b21"
+            ],
+            [
+                "a2e3edf8.431d5",
+                "56b6fee9.05e01",
+                "51498a0.4470e78"
+            ]
+        ]
+    },
+    {
+        "id": "674ac66f.89ccd8",
+        "type": "change",
+        "z": "2fa3e06f.6fe44",
+        "name": "Profil 1: work",
+        "rules": [
+            {
+                "t": "set",
+                "p": "datapoint",
+                "pt": "msg",
+                "to": "ACTIVE_PROFILE",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1030,
+        "y": 380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "98537835.70af58",
+        "type": "change",
+        "z": "2fa3e06f.6fe44",
+        "name": "Automatik",
+        "rules": [
+            {
+                "t": "set",
+                "p": "datapoint",
+                "pt": "msg",
+                "to": "CONTROL_MODE",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1020,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b0d9ea66.06eb48",
+        "type": "change",
+        "z": "2fa3e06f.6fe44",
+        "name": "Profil 2: home",
+        "rules": [
+            {
+                "t": "set",
+                "p": "datapoint",
+                "pt": "msg",
+                "to": "ACTIVE_PROFILE",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "2",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1040,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fa63f25.725b21",
+        "type": "change",
+        "z": "2fa3e06f.6fe44",
+        "name": "Profil 3: party",
+        "rules": [
+            {
+                "t": "set",
+                "p": "datapoint",
+                "pt": "msg",
+                "to": "ACTIVE_PROFILE",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "3",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1030,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "56b6fee9.05e01",
+        "type": "change",
+        "z": "2fa3e06f.6fe44",
+        "name": "Manuell",
+        "rules": [
+            {
+                "t": "set",
+                "p": "datapoint",
+                "pt": "msg",
+                "to": "CONTROL_MODE",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1020,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a2e3edf8.431d5",
+        "type": "change",
+        "z": "2fa3e06f.6fe44",
+        "name": "Profil 1: work",
+        "rules": [
+            {
+                "t": "set",
+                "p": "datapoint",
+                "pt": "msg",
+                "to": "ACTIVE_PROFILE",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1030,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4e9a53b3.54435c",
+        "type": "comment",
+        "z": "2fa3e06f.6fe44",
+        "name": "off",
+        "info": "",
+        "x": 850,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "51498a0.4470e78",
+        "type": "change",
+        "z": "2fa3e06f.6fe44",
+        "name": "Temperatur 4.5°C",
+        "rules": [
+            {
+                "t": "set",
+                "p": "datapoint",
+                "pt": "msg",
+                "to": "SET_POINT_TEMPERATURE",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "4.5",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1050,
+        "y": 640,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7a97568a.392878",
+        "type": "change",
+        "z": "2fa3e06f.6fe44",
+        "name": "Temperatur",
+        "rules": [
+            {
+                "t": "set",
+                "p": "datapoint",
+                "pt": "msg",
+                "to": "SET_POINT_TEMPERATURE",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1030,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3383861f.4d1f8a",
+        "type": "switch",
+        "z": "2fa3e06f.6fe44",
+        "name": "Unterscheidung nach Topic",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "profile",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "temperature",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 500,
+        "y": 600,
+        "wires": [
+            [
+                "78e6fcba.dcbd14"
+            ],
+            [
+                "c69c50a6.41dd3"
+            ]
+        ]
+    },
+    {
+        "id": "c69c50a6.41dd3",
+        "type": "no-op",
+        "z": "2fa3e06f.6fe44",
+        "name": "",
+        "x": 750,
+        "y": 700,
+        "wires": [
+            [
+                "7a97568a.392878"
+            ]
+        ]
+    },
+    {
+        "id": "d2d91da9.88cb1",
+        "type": "link in",
+        "z": "17da6de7.fab662",
+        "name": "von der globalen Einstellung",
+        "links": [],
+        "x": 240,
+        "y": 220,
+        "wires": [
+            [
+                "3508fc48.c83464"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "d91c6c59.18805",
+        "type": "ccu-value",
+        "z": "17da6de7.fab662",
+        "name": "",
+        "iface": "HmIP-RF",
+        "channel": "00201A499E39F4:1 eg_azi_hzgThermostat:1",
+        "datapoint": "",
+        "mode": "",
+        "start": true,
+        "change": true,
+        "cache": false,
+        "queue": false,
+        "on": 0,
+        "onType": "undefined",
+        "ramp": 0,
+        "rampType": "undefined",
+        "working": false,
+        "ccuConfig": "38263145.35ea0e",
+        "topic": "${CCU}/${Interface}/${channel}/${datapoint}",
+        "x": 950,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4807ec88.3d2954",
+        "type": "subflow:2fa3e06f.6fe44",
+        "z": "17da6de7.fab662",
+        "name": "",
+        "env": [],
+        "x": 710,
+        "y": 240,
+        "wires": [
+            [
+                "d91c6c59.18805"
+            ]
+        ]
+    },
+    {
+        "id": "aa57338.72d16d",
+        "type": "ui_button",
+        "z": "17da6de7.fab662",
+        "name": "18°C",
+        "group": "d8715.275e38ec",
+        "order": 5,
+        "width": 1,
+        "height": 1,
+        "passthru": true,
+        "label": "",
+        "tooltip": "18°C",
+        "color": "#5050bb",
+        "bgcolor": "#333333",
+        "icon": "fa-thermometer-half fa-2x",
+        "payload": "18",
+        "payloadType": "num",
+        "topic": "temperature",
+        "topicType": "str",
+        "x": 490,
+        "y": 240,
+        "wires": [
+            [
+                "4807ec88.3d2954"
+            ]
+        ]
+    },
+    {
+        "id": "8b000b93.ba6ad8",
+        "type": "ui_button",
+        "z": "17da6de7.fab662",
+        "name": "22°C",
+        "group": "65a72644.483318",
+        "order": 6,
+        "width": 1,
+        "height": 1,
+        "passthru": true,
+        "label": "",
+        "tooltip": "22°C",
+        "color": "#bb5050",
+        "bgcolor": "#333333",
+        "icon": "fa-thermometer-full fa-2x",
+        "payload": "22",
+        "payloadType": "num",
+        "topic": "temperature",
+        "topicType": "str",
+        "x": 490,
+        "y": 280,
+        "wires": [
+            [
+                "4807ec88.3d2954"
+            ]
+        ]
+    },
+    {
+        "id": "9df66239.08be7",
+        "type": "inject",
+        "z": "17da6de7.fab662",
+        "name": "Beim Start das letzte Profil laden",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "heizungsProfil",
+        "payloadType": "flow",
+        "x": 220,
+        "y": 180,
+        "wires": [
+            [
+                "3508fc48.c83464"
+            ]
+        ]
+    },
+    {
+        "id": "3508fc48.c83464",
+        "type": "ui_dropdown",
+        "z": "17da6de7.fab662",
+        "name": "",
+        "label": "",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "d8715.275e38ec",
+        "order": 4,
+        "width": 2,
+        "height": 1,
+        "passthru": true,
+        "multiple": false,
+        "options": [
+            {
+                "label": "Arbeit",
+                "value": "work",
+                "type": "str"
+            },
+            {
+                "label": "zu Hause",
+                "value": "home",
+                "type": "str"
+            },
+            {
+                "label": "Party",
+                "value": "party",
+                "type": "str"
+            },
+            {
+                "label": "Aus",
+                "value": "off",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "profile",
+        "topicType": "str",
+        "x": 480,
+        "y": 180,
+        "wires": [
+            [
+                "4807ec88.3d2954",
+                "abe11206.93cf"
+            ]
+        ]
+    },
+    {
+        "id": "abe11206.93cf",
+        "type": "change",
+        "z": "17da6de7.fab662",
+        "name": "Profil sichern",
+        "rules": [
+            {
+                "t": "set",
+                "p": "heizungsProfil",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 690,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "683cd2a5.5d828c",
+        "type": "ccu-rpc-event",
+        "z": "17da6de7.fab662",
+        "name": "Temperatur",
+        "iface": "",
+        "ccuConfig": "38263145.35ea0e",
+        "rooms": "Büro",
+        "roomsRx": "str",
+        "functions": "",
+        "functionsRx": "str",
+        "device": "",
+        "deviceRx": "str",
+        "deviceName": "eg_azi_hzgThermostat",
+        "deviceNameRx": "str",
+        "deviceType": "",
+        "deviceTypeRx": "str",
+        "channel": "",
+        "channelRx": "str",
+        "channelName": "eg_azi_hzgThermostat:1",
+        "channelNameRx": "str",
+        "channelType": "",
+        "channelTypeRx": "str",
+        "channelIndex": "",
+        "channelIndexRx": "str",
+        "datapoint": "ACTUAL_TEMPERATURE",
+        "datapointRx": "str",
+        "change": true,
+        "working": false,
+        "cache": true,
+        "topic": "${CCU}/${Interface}/${channelName}/${datapoint}",
+        "x": 150,
+        "y": 340,
+        "wires": [
+            [
+                "8e1412ef.a169"
+            ]
+        ]
+    },
+    {
+        "id": "8e1412ef.a169",
+        "type": "combine-statistic",
+        "z": "17da6de7.fab662",
+        "name": "Durchschnitt",
+        "topic": "",
+        "operator": "mean",
+        "defer": 250,
+        "timeout": 0,
+        "distinction": "topic",
+        "x": 330,
+        "y": 340,
+        "wires": [
+            [
+                "6cde0f16.809ac"
+            ]
+        ]
+    },
+    {
+        "id": "6cde0f16.809ac",
+        "type": "ui_level",
+        "z": "17da6de7.fab662",
+        "group": "d8715.275e38ec",
+        "order": 2,
+        "width": 4,
+        "height": 1,
+        "name": "",
+        "label": "",
+        "colorHi": "#e60000",
+        "colorWarn": "#008000",
+        "colorNormal": "#0000ff",
+        "colorOff": "#595959",
+        "min": "16",
+        "max": "28",
+        "segWarn": "20",
+        "segHigh": "23",
+        "unit": "°C",
+        "layout": "sh",
+        "channelA": "",
+        "channelB": "",
+        "decimals": "1",
+        "animations": "soft",
+        "shape": "3",
+        "colorschema": "rainbow",
+        "textoptions": "default",
+        "colorText": "#eeeeee",
+        "fontLabel": "",
+        "fontValue": "",
+        "fontSmall": "",
+        "colorFromTheme": true,
+        "textAnimations": false,
+        "hideValue": false,
+        "tickmode": "auto",
+        "peakmode": false,
+        "property": "payload",
+        "peaktime": 3000,
+        "x": 510,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "38263145.35ea0e",
+        "type": "ccu-connection",
+        "name": "cohob",
+        "host": "localhost",
+        "regaEnabled": true,
+        "bcrfEnabled": false,
+        "iprfEnabled": true,
+        "virtEnabled": false,
+        "bcwiEnabled": false,
+        "cuxdEnabled": false,
+        "regaPoll": true,
+        "regaInterval": "30",
+        "rpcPingTimeout": "60",
+        "rpcInitAddress": "127.0.0.1",
+        "rpcServerHost": "127.0.0.1",
+        "rpcBinPort": "2047",
+        "rpcXmlPort": "2048",
+        "tls": false,
+        "inSecure": false,
+        "authentication": false,
+        "username": "",
+        "password": "",
+        "queueTimeout": "5000",
+        "queuePause": "250",
+        "contextStore": ""
+    },
+    {
+        "id": "d8715.275e38ec",
+        "type": "ui_group",
+        "name": "CoHoB",
+        "tab": "142268d8.42f917",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": false
+    },
+    {
+        "id": "65a72644.483318",
+        "type": "ui_group",
+        "name": "Virtuelle Taste BidCoS-RF:1",
+        "tab": "fe205248.f04ed",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "142268d8.42f917",
+        "type": "ui_tab",
+        "name": "UI",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "fe205248.f04ed",
+        "type": "ui_tab",
+        "name": "Geräte",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": true
+    }
+]
