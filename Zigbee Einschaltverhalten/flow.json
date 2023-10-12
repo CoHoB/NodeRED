@@ -1,0 +1,152 @@
+[
+    {
+        "id": "d5cf0cf9.93782",
+        "type": "zigbee-converter",
+        "z": "e0552b19.b080c8",
+        "shepherd": "1a11262.477e7da",
+        "name": "Leuchtmittel",
+        "topic": "zigbee/${name}",
+        "settopic": "zigbee/${name}/set",
+        "gettopic": "zigbee/${name}/get",
+        "device": "0x00178801038d3347",
+        "attribute": "",
+        "payload": "plain",
+        "x": 630,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5a42bbd6.f77664",
+        "type": "inject",
+        "z": "e0552b19.b080c8",
+        "name": "",
+        "props": [
+            {
+                "p": "name",
+                "v": "eg_wozi_licht_fernseher",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 220,
+        "y": 220,
+        "wires": [
+            [
+                "7e99a80f.d37678"
+            ]
+        ]
+    },
+    {
+        "id": "7e99a80f.d37678",
+        "type": "change",
+        "z": "e0552b19.b080c8",
+        "name": "HUE-Parameter",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"hue_power_on_behavior\":\"off\"}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "zigbee/{{name}}/set",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 220,
+        "wires": [
+            [
+                "d5cf0cf9.93782"
+            ]
+        ]
+    },
+    {
+        "id": "9a193cfb.c7fcc",
+        "type": "change",
+        "z": "e0552b19.b080c8",
+        "name": "Ikea-Parameter",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"power_on_behavior\":\"off\"}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "zigbee/{{name}}/set",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 260,
+        "wires": [
+            [
+                "d5cf0cf9.93782"
+            ]
+        ]
+    },
+    {
+        "id": "cdb87f9d.4911c",
+        "type": "inject",
+        "z": "e0552b19.b080c8",
+        "name": "",
+        "props": [
+            {
+                "p": "name",
+                "v": "eg_wozi_licht_fernseher",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 220,
+        "y": 260,
+        "wires": [
+            [
+                "9a193cfb.c7fcc"
+            ]
+        ]
+    },
+    {
+        "id": "1a11262.477e7da",
+        "type": "zigbee-shepherd",
+        "name": "zigbee herdsman",
+        "path": "/dev/ttyUSB0",
+        "baudRate": "115200",
+        "rtscts": false,
+        "channelList": [
+            26
+        ],
+        "led": "disabled",
+        "adapter": "zstack"
+    }
+]
+
